@@ -4,7 +4,8 @@
   "description": "General Visual Test tooling",
   "private": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:unit:watch": "vitest --watch --ui",
+    "test:unit": "vitest --run"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/ranitopus/heimdall-visual-test/issues"
   },
-  "homepage": "https://github.com/ranitopus/heimdall-visual-test#readme"
+  "homepage": "https://github.com/ranitopus/heimdall-visual-test#readme",
+  "devDependencies": {
+    "@vitest/ui": "^0.31.0",
+    "vitest": "^0.31.0"
+  }
 }

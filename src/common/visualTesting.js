@@ -161,5 +161,10 @@ export function testImagesDiff({
 }
 
 export function imgBase64ToDataUrl(base64String) {
+  if (typeof base64String !== 'string') throw TypeError('argument should be a string')
+
+  base64String = base64String.replace(/\s/g, '')
+  if (!/^[a-z0-9]+={0,2}$/i.test(base64String)) throw TypeError('argument should be a valid base64 string')
+
   return `data:image/png;base64,${base64String}`
 }
