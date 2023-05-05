@@ -1,3 +1,3 @@
 Heimdall Visual Test
 =====================
-**Tooling for visual testing automation**
+**JavaScript tooling for visual testing automation**
