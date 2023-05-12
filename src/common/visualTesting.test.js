@@ -56,3 +56,16 @@ describe('function #imgBase64ToDataUrl', () => {
     expect(() => imgBase64ToDataUrl(inputF)).toThrow(TypeError, 'argument should be a valid base64 string')
   })
 })
+
+describe('function #rgbToHsl', () => {
+  it.todo('should correctly convert an RGB vector to a HSL vector', () => {
+
+  })
+})
+
+describe.todo('function #arePixelsEqual')
+describe.todo('function #highlightedDiffPixel')
+describe.todo('function #diffResultMessage')
+describe.todo('function #calcDiffWithCanvas')
+describe.todo('function #loadImage')
+describe.todo('function #testImagesDiff')
