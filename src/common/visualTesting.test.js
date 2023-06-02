@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-import { imgBase64ToDataUrl } from './visualTesting'
+import { imgBase64ToDataUrl, rgbToHsl } from './visualTesting'
 
 describe('function #imgBase64ToDataUrl', () => {
   it('should generate a valid URL', () => {
@@ -45,8 +45,8 @@ describe('function #imgBase64ToDataUrl', () => {
 
   it('should not accept an invalid base64 string as argument', () => {
     // Arrange
-    const inputA = '', inputB = 'not.a;base64', inputC = 'çÁëỳ',
-          inputD = '-_+', inputE = '=abcd', inputF = 'ab=cd'
+    const inputA = '',    inputB = 'not.a;base64', inputC = 'çÁëỳ',
+          inputD = '-_+', inputE = '=abcd',        inputF = 'ab=cd'
     // Assert
     expect(() => imgBase64ToDataUrl(inputA)).toThrow(TypeError, 'argument should be a valid base64 string')
     expect(() => imgBase64ToDataUrl(inputB)).toThrow(TypeError, 'argument should be a valid base64 string')
@@ -58,8 +58,25 @@ describe('function #imgBase64ToDataUrl', () => {
 })
 
 describe('function #rgbToHsl', () => {
-  it.todo('should correctly convert an RGB vector to a HSL vector', () => {
-
+  it('should correctly convert an RGB vector to a HSL vector', () => {
+    // Arrange
+    const inputA = [0, 0, 0],     inputB = [127, 127, 127], inputC = [255, 255, 255], // white, grey, black
+          inputD = [255, 0, 0],   inputE = [0, 255, 0],     inputF = [0, 0, 255],     // red, green, blue
+          inputG = [178, 34, 34], inputH = [85, 107, 47],   inputI = [100, 149, 237]  // firebrick, darkolivegreen, cornflowerblue
+    // Act
+    const resultA = rgbToHsl(inputA), resultB = rgbToHsl(inputB), resultC = rgbToHsl(inputC),
+          resultD = rgbToHsl(inputD), resultE = rgbToHsl(inputE), resultF = rgbToHsl(inputF),
+          resultG = rgbToHsl(inputG), resultH = rgbToHsl(inputH), resultI = rgbToHsl(inputI)
+    // Assert
+    expect(resultA).toStrictEqual([0, 0, 0])
+    expect(resultB).toStrictEqual([0, 0, 50])
+    expect(resultC).toStrictEqual([0, 0, 100])
+    expect(resultD).toStrictEqual([0, 100, 50])
+    expect(resultE).toStrictEqual([120, 100, 50])
+    expect(resultF).toStrictEqual([240, 100, 50])
+    expect(resultG).toStrictEqual([0, 68, 42])
+    expect(resultH).toStrictEqual([82, 39, 30])
+    expect(resultI).toStrictEqual([219, 79, 66])
   })
 })
 

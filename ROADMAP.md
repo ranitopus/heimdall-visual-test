@@ -3,7 +3,7 @@ ROADMAP
 
 - [x] Basic API for image comparison using JavaScript Image instances, Canvas elements, and HSL pixels comparison
 - [x] Integration with Cypress
-- [x] NPM package publishing (Cypress module)
+- [x] NPM package publishing (base image comparison API + Cypress module)
 - [ ] Unit testing for the abstract lib for image comparison
 - [ ] Better abstract lib for image comparison, with richer API, working on Node.js and browser environments
 - [ ] Friendly display of image comparison on the Cypress suite screen (for headless runs with video recording, for example)

@@ -1,30 +1,31 @@
-function rgbToHsl([r, g, b]) {
+/**
+ * Sources used for research to implement this function:
+ * - https://css-tricks.com/converting-color-spaces-in-javascript/#aa-rgb-to-hsl
+ * - https://www.30secondsofcode.org/js/s/rgb-to-hsl/
+ * - https://en.wikipedia.org/wiki/HSL_and_HSV
+ */
+export function rgbToHsl([r, g, b]) {
   r = r / 255; g = g / 255; b = b / 255
 
-  const lBase = Math.max(r, g, b)
-  const sBase = lBase - Math.min(r, g, b)
-  const hBase = sBase ? (
-          (lBase === r) ?
-          ((g - b) / sBase) : (
-            (lBase === g) ?
-            (2 + ((b - r) / sBase)) :
-            (4 + ((r - g) / sBase))
-          )
-        ) :
-        0
+  const min = Math.min(r, g, b),
+        max = Math.max(r, g, b),
+        delta = max - min
+  let h = 0, s = 0, l = 0
 
-  const h = ((60 * hBase) < 0) ? ((60 * hBase) + 360) : (60 * hBase)
-  const s = 100 * (
-          sBase ? (
-            (lBase <= 0.5) ?
-            (sBase / ((2 * lBase) - sBase)) :
-            (sBase / (2 - ((2 * lBase) - sBase)))
-          ) :
-          0
-        )
-  const l = (100 * ((2 * lBase) - sBase)) / 2
+  if (delta === 0)
+    h = 0
+  else if (max === r)
+    h = ((g - b) / delta) % 6
+  else if (max === g)
+    h = (b - r) / delta + 2
+  else
+    h = (r - g) / delta + 4
 
-  return [Math.round(h), Math.round(s), Math.round(l)]
+  l = (max + min) / 2
+
+  s = (delta == 0) ? 0 : delta / (1 - Math.abs(2 * l - 1))
+
+  return [Math.round(h * 60), Math.round(s * 100), Math.round(l * 100)]
 }
 
 /** Comparação em HSL */
