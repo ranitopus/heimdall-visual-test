@@ -15,7 +15,7 @@ ROADMAP 1.0
 - [ ] Better abstract lib for image comparison, with richer API, working on both Node.js and browser environments
 - [ ] Give to the Cypress test command the capacity of screenshoting single DOM elements
 - [ ] TypeScript type definitions
-- [ ] "How-to-use" documentation
+- [ ] "How-to-use" documentation (Improve README and add more docs if needed)
 - [ ] Bundle/build process with separation of libs (example: [Lerna](https://lerna.js.org/))
 - [ ] CD Automated Pipeline to publish NPM package
 - [ ] Better criteria for pixels comparison, with more cofigurable thresholds (separating H, S and L)
@@ -26,7 +26,8 @@ ROADMAP 1.0
 ### Planned release date
 - (TBD...)
 ### Expected behavior & features
-- (TBD...)
+- Two image comparison options: *Naive* (pixel by pixel comparison with some control thresholds), or *OpenCV Algorithm* ([SIFT](https://docs.opencv.org/4.x/da/df5/tutorial_py_sift_intro.html), [SURF](https://docs.opencv.org/4.x/df/dd2/tutorial_py_surf_intro.html), or some other alternative, yet to be chosen)
+- (...)
 
 ## 1.0.0-beta Release
 ### Planned release date
