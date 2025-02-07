@@ -6,7 +6,7 @@ ROADMAP 1.0
 - [x] Basic API for image comparison using JavaScript Image instances, Canvas elements, and HSL pixels comparison
 - [x] Integration with Cypress
 - [x] NPM first package publishing (naive implementation + Cypress integration only)
-- [ ] **Consolidate ROADMAP 1.0 `IN PROGRESS`**
+- [x] Consolidate ROADMAP 1.0
 - [ ] **Unit testing for the abstract lib for image comparison `IN PROGRESS`**
 - [ ] End-to-end/functional testing for the Cypress integration
 - [ ] CI automated pipeline to run tests before merging
