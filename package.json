@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/ranitopus/heimdall-visual-test#readme",
   "devDependencies": {
-    "@vitest/ui": "^0.31.0",
-    "vitest": "^0.31.0"
+    "@vitest/ui": "^3.0.5",
+    "vitest": "^3.0.5"
   }
 }
