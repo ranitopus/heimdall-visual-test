@@ -1,4 +1,5 @@
-import { testImagesDiff, imgBase64ToDataUrl } from '../common/visualTesting'
+import { imgBase64ToDataUrl } from '../common/helpers'
+import { testImagesDiff } from '../core/naive'
 
 function normalizeFilename(filename) {
   return filename.trim().replace(/\//g, '_')

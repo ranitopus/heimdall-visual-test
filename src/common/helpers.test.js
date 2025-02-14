@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-import { imgBase64ToDataUrl, rgbToHsl } from './visualTesting'
+import { imgBase64ToDataUrl, rgbToHsl, loadHtmlImage } from './helpers'
 
 describe('function #imgBase64ToDataUrl', () => {
   it('should generate a valid URL', () => {
@@ -60,8 +60,8 @@ describe('function #imgBase64ToDataUrl', () => {
 describe('function #rgbToHsl', () => {
   it('should correctly convert an RGB vector to a HSL vector', () => {
     // Arrange
-    const inputA = [0, 0, 0],     inputB = [127, 127, 127], inputC = [255, 255, 255], // white, grey, black
-          inputD = [255, 0, 0],   inputE = [0, 255, 0],     inputF = [0, 0, 255],     // red, green, blue
+    const inputA = [0, 0, 0],     inputB = [127, 127, 127], inputC = [255, 255, 255], // white,     grey,           black,
+          inputD = [255, 0, 0],   inputE = [0, 255, 0],     inputF = [0, 0, 255],     // red,       green,          blue,
           inputG = [178, 34, 34], inputH = [85, 107, 47],   inputI = [100, 149, 237]  // firebrick, darkolivegreen, cornflowerblue
     // Act
     const resultA = rgbToHsl(inputA), resultB = rgbToHsl(inputB), resultC = rgbToHsl(inputC),
@@ -80,9 +80,4 @@ describe('function #rgbToHsl', () => {
   })
 })
 
-describe.todo('function #arePixelsEqual')
-describe.todo('function #highlightedDiffPixel')
-describe.todo('function #diffResultMessage')
-describe.todo('function #calcDiffWithCanvas')
-describe.todo('function #loadImage')
-describe.todo('function #testImagesDiff')
+describe.todo('function #loadHtmlImage')
