@@ -1,10 +1,10 @@
 function isValidRgbVector(value) {
-  if (!value) return TypeError('value should not be falsy/empty')
-  if (!Array.isArray(value)) return TypeError('value should be an array')
-  if (value.length !== 3) return RangeError('value should have exactly 3 items')
-  if (value.some(item => !Number.isInteger(item))) return TypeError('some item in value is not an integer number')
-  if (value.some(item => item < 0)) return RangeError('some item in value is not a positive integer')
-  if (value.some(item => item > 255)) return RangeError('some item in value is over 255')
+  if (
+    !value || !Array.isArray(value) || (value.length !== 3) ||
+    value.some(item => !Number.isInteger(item)) ||
+    value.some(item => item < 0) || value.some(item => item > 255)
+  )
+    return TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)')
 
   return true
 }
@@ -42,10 +42,10 @@ export function rgbToHsl(rgbVector) {
 }
 
 export function imgBase64ToDataUrl(base64String) {
-  if (typeof base64String !== 'string') throw TypeError('argument should be a string')
+  if (typeof base64String !== 'string') throw TypeError('value should only be a valid base64 string')
 
   base64String = base64String.replace(/\s/g, '')
-  if (!/^[a-z0-9]+={0,2}$/i.test(base64String)) throw TypeError('argument should be a valid base64 string')
+  if (!/^[a-z0-9]+={0,2}$/i.test(base64String)) throw TypeError('value should only be a valid base64 string')
 
   return `data:image/png;base64,${base64String}`
 }
@@ -56,4 +56,39 @@ export function loadHtmlImage(url, onloadCallback) {
   img.src = url
 
   return img
+}
+
+function isNonEmptyString(value) {
+  if (!value || typeof value !== 'string' || !value.trim())
+    return TypeError('value should only be a non-empty string')
+
+  return true
+}
+
+const acceptedImageExtensions = ['jpg', 'jpeg', 'png', 'webp']
+
+function isAcceptedImageExtension(value) {
+  if (
+    isNonEmptyString(value) !== true ||
+    !acceptedImageExtensions.includes(value.toLowerCase())
+  )
+    return TypeError('value should only be an accepted image extension (strings jpg, jpeg, png or webp)')
+
+  return true
+}
+
+export function normalizeTestImageFilename(filename, extension) {
+  const filenameResult = isNonEmptyString(filename)
+  if (filenameResult !== true) throw filenameResult
+
+  let normalizedFilename = filename.trim().replace(/\//g, '_')
+
+  if (extension != null) {
+    const extensionResult = isAcceptedImageExtension(extension)
+    if (extensionResult !== true) throw extensionResult
+
+    normalizedFilename += '.' + extension.toLowerCase()
+  }
+
+  return normalizedFilename
 }

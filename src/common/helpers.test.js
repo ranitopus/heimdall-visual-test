@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 
-import { imgBase64ToDataUrl, rgbToHsl, loadHtmlImage } from './helpers'
+import {
+  imgBase64ToDataUrl, rgbToHsl, loadHtmlImage, normalizeTestImageFilename
+} from './helpers'
 
 describe('function #imgBase64ToDataUrl', () => {
   it('should generate a valid URL', () => {
@@ -32,40 +34,22 @@ describe('function #imgBase64ToDataUrl', () => {
     // Assert
     expect(resultA).toMatch(new RegExp(`^data:image/[a-z]{3,4};base64,${inputA}`))
     expect(resultB).toMatch(new RegExp(`^data:image/[a-z]{3,4};base64,${inputB}`))
-    expect(attemptC).toThrow(TypeError, 'argument should be a valid base64 string')
+    expect(attemptC).toThrow(TypeError('value should only be a valid base64 string'))
   })
 
-  it('should not accept a non-string input', () => {
+  it('should only accept a valid base64 string as argument', () => {
     // Arrange
-    const inputA = false, inputB = 0, inputC = {}
-    // Act
-    const attemptA = () => imgBase64ToDataUrl(inputA),
-          attemptB = () => imgBase64ToDataUrl(inputB),
-          attemptC = () => imgBase64ToDataUrl(inputC)
-    // Assert
-    expect(attemptA).toThrow(TypeError, 'argument should be a string')
-    expect(attemptB).toThrow(TypeError, 'argument should be a string')
-    expect(attemptC).toThrow(TypeError, 'argument should be a string')
-  })
+    const inputs = [
+      false, 0, {}, '', 'not.a;base64', 'çÁëỳ', '-_+', '=abcd', 'ab=cd',
+    ]
+    let attempt
 
-  it('should not accept an invalid base64 string as argument', () => {
-    // Arrange
-    const inputA = '',    inputB = 'not.a;base64', inputC = 'çÁëỳ',
-          inputD = '-_+', inputE = '=abcd',        inputF = 'ab=cd'
-    // Act
-    const attemptA = () => imgBase64ToDataUrl(inputA),
-          attemptB = () => imgBase64ToDataUrl(inputB),
-          attemptC = () => imgBase64ToDataUrl(inputC),
-          attemptD = () => imgBase64ToDataUrl(inputD),
-          attemptE = () => imgBase64ToDataUrl(inputE),
-          attemptF = () => imgBase64ToDataUrl(inputF)
-    // Assert
-    expect(attemptA).toThrow(TypeError, 'argument should be a valid base64 string')
-    expect(attemptB).toThrow(TypeError, 'argument should be a valid base64 string')
-    expect(attemptC).toThrow(TypeError, 'argument should be a valid base64 string')
-    expect(attemptD).toThrow(TypeError, 'argument should be a valid base64 string')
-    expect(attemptE).toThrow(TypeError, 'argument should be a valid base64 string')
-    expect(attemptF).toThrow(TypeError, 'argument should be a valid base64 string')
+    inputs.forEach(input => {
+      // Act
+      attempt = () => imgBase64ToDataUrl(input)
+      // Assert
+      expect(attempt).toThrow(TypeError('value should only be a valid base64 string'))
+    })
   })
 })
 
@@ -91,28 +75,80 @@ describe('function #rgbToHsl', () => {
     expect(resultI).toStrictEqual([219, 79, 66])
   })
 
-  it('should not accept an input that is not a valid RGB vector (array of 3 integers ranging from 0 to 255)', () => {
+  it('should only accept a valid RGB vector as argument (array of 3 integers ranging from 0 to 255)', () => {
     // Arrange
-    const inputA = '255,255,255',     inputB = [],            inputC = [0, 0, '0'],
-          inputD = [127, 127.5, 127], inputE = [-64, 64, 64], inputF = [255, 255, 512],
-          inputG = null,              inputH = [0, 0],        inputI = [0, 0, 0, 0]
-    // Act
-    const attemptA = () => rgbToHsl(inputA), attemptB = () => rgbToHsl(inputB),
-          attemptC = () => rgbToHsl(inputC), attemptD = () => rgbToHsl(inputD),
-          attemptE = () => rgbToHsl(inputE), attemptF = () => rgbToHsl(inputF),
-          attemptG = () => rgbToHsl(inputG), attemptH = () => rgbToHsl(inputH),
-          attemptI = () => rgbToHsl(inputI)
-    // Assert
-    expect(attemptA).toThrow(TypeError,  'value should be an array')
-    expect(attemptB).toThrow(RangeError, 'value should have exactly 3 items')
-    expect(attemptC).toThrow(TypeError,  'some item in value is not an integer number')
-    expect(attemptD).toThrow(TypeError,  'some item in value is not an integer number')
-    expect(attemptE).toThrow(RangeError, 'some item in value is not a positive integer')
-    expect(attemptF).toThrow(RangeError, 'some item in value is over 255')
-    expect(attemptG).toThrow(TypeError,  'value should not be falsy/empty')
-    expect(attemptH).toThrow(RangeError, 'value should have exactly 3 items')
-    expect(attemptI).toThrow(RangeError, 'value should have exactly 3 items')
+    const inputs = [
+      '255,255,255', [], [0, 0, '0'], [127, 127.5, 127], [-64, 64, 64],
+      [255, 255, 512], null, [0, 0], [0, 0, 0, 0],
+    ]
+    let attempt
+
+    inputs.forEach(input => {
+      // Act
+      attempt = () => rgbToHsl(input)
+      // Assert
+      expect(attempt).toThrow(TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)'))
+    })
   })
 })
 
 describe.todo('function #loadHtmlImage')
+
+describe('function #normalizeTestImageFilename', () => {
+  it('should convert string from format "a/b/c" to "a_b_c"', () => {
+    // Arrange
+    const filename = 'path/to/file'
+    // Act
+    const result = normalizeTestImageFilename(filename)
+    // Assert
+    expect(result).toMatch('path_to_file')
+  })
+
+  it('should add file extension when valid argument is passed (for now: jpg/jpeg, png, webp)', () => {
+    // Arrange
+    const filename = 'another/file/path', validExtensions = [
+      'jpg', 'jpeg', 'png', 'webp',
+      'JPG', 'JPEG', 'PNG', 'WEBP',
+      'Jpg', 'jPeg', 'pnG', 'wEbP',
+    ]
+    let result
+
+    validExtensions.forEach(extension => {
+      // Act
+      result = normalizeTestImageFilename(filename, extension)
+      // Assert
+      expect(result).toMatch(/another_file_path\.[jpg|jpeg|png|webp]/)
+    })
+  })
+
+  it('should only accept a non-empty string as filename argument', () => {
+    // Arrange
+    const invalidFilenames = [
+      /regex\/to\/file/, '', 1337, false, null, undefined, {}, [], () => {},
+    ]
+    let attempt
+
+    invalidFilenames.forEach(filename => {
+      // Act
+      attempt = () => normalizeTestImageFilename(filename)
+      // Assert
+      expect(attempt).toThrow(TypeError('value should only be a non-empty string'))
+    })
+  })
+
+  it('should not accept invalid image extensions as second argument', () => {
+    // Arrange
+    const filename = 'yet/another/path', invalidExtensions = [
+      1337, false, {}, [], () => {}, '',
+      'mp3', 'wav', 'svg', 'gif', 'webm', 'mkv', 'html',
+    ]
+    let attempt
+
+    invalidExtensions.forEach(extension => {
+      // Act
+      attempt = () => normalizeTestImageFilename(filename, extension)
+      // Accept
+      expect(attempt).toThrow(TypeError('value should only be an accepted image extension (strings jpg, jpeg, png or webp)'))
+    })
+  })
+})

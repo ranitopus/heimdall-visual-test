@@ -1,13 +1,12 @@
 const fs = require('fs/promises')
+const normalizeFilename = require('../common/helpers').normalizeTestImageFilename
 
-function normalizeFilename(filename) {
-  return filename.trim().replace(/\//g, '_') + '.png'
-}
+const defaultImageExtension = 'png'
 
 module.exports = function visualTestingTasks(cypressConfig) {
   return {
     maybeVisualTestExists({ imageName }) {
-      imageName = normalizeFilename(imageName)
+      imageName = normalizeFilename(imageName, defaultImageExtension)
 
       return fs.stat(`${cypressConfig.visualTestFolder}/${imageName}`)
         .then(_=> true)
@@ -17,7 +16,7 @@ module.exports = function visualTestingTasks(cypressConfig) {
         })
     },
     async mvToVisualTestFolder({ imageName }) {
-      imageName = normalizeFilename(imageName)
+      imageName = normalizeFilename(imageName, defaultImageExtension)
 
       await fs.stat(cypressConfig.visualTestFolder).catch(err => {
         if (err.code === 'ENOENT') return fs.mkdir(cypressConfig.visualTestFolder)
@@ -31,7 +30,7 @@ module.exports = function visualTestingTasks(cypressConfig) {
         .then(_=> null)
     },
     rmCurrentVisualState({ imageName }) {
-      imageName = normalizeFilename(imageName)
+      imageName = normalizeFilename(imageName, defaultImageExtension)
       return fs.rm(`${cypressConfig.screenshotsFolder}/${imageName}`)
         .then(_=> null)
     },

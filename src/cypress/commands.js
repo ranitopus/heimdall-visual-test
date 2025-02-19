@@ -1,9 +1,6 @@
 import { imgBase64ToDataUrl } from '../common/helpers'
 import { testImagesDiff } from '../core/naive'
-
-function normalizeFilename(filename) {
-  return filename.trim().replace(/\//g, '_')
-}
+import { normalizeTestImageFilename as normalizeFilename } from '../common/helpers'
 
 Cypress.Commands.add('visualTest', {prevSubject: 'optional'}, (_, {
   snapshotName, commandTimeout = 30_000, imageDiffOptions = {},
