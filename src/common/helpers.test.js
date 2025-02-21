@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-import {
-  imgBase64ToDataUrl, rgbToHsl, loadHtmlImage, normalizeTestImageFilename
-} from './helpers'
+import { imgBase64ToDataUrl, rgbToHsl, normalizeTestImageFilename } from './helpers'
 
 describe('function #imgBase64ToDataUrl', () => {
   it('should generate a valid URL', () => {
@@ -91,8 +89,6 @@ describe('function #rgbToHsl', () => {
     })
   })
 })
-
-describe.todo('function #loadHtmlImage')
 
 describe('function #normalizeTestImageFilename', () => {
   it('should convert string from format "a/b/c" to "a_b_c"', () => {

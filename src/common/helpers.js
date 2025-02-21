@@ -52,7 +52,12 @@ export function imgBase64ToDataUrl(base64String) {
 
 export function loadHtmlImage(url, onloadCallback) {
   const img = new Image(); img.crossOrigin = 'anonymous'; img.hasLoaded = false
-  img.onload = _=> { img.hasLoaded = true; onloadCallback(img) }
+  img.onload  = _=> {
+    console.log('[DEBUG] img did load:', img)
+    img.hasLoaded = true
+    onloadCallback?.(img)
+  }
+  console.log('[DEBUG] will pass src to <img>:', url)
   img.src = url
 
   return img
