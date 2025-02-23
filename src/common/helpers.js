@@ -50,14 +50,10 @@ export function imgBase64ToDataUrl(base64String) {
   return `data:image/png;base64,${base64String}`
 }
 
-export function loadHtmlImage(url, onloadCallback) {
-  const img = new Image(); img.crossOrigin = 'anonymous'; img.hasLoaded = false
-  img.onload  = _=> {
-    console.log('[DEBUG] img did load:', img)
-    img.hasLoaded = true
-    onloadCallback?.(img)
-  }
-  console.log('[DEBUG] will pass src to <img>:', url)
+export function loadHtmlImage(url, onloadCallback, onerrorCallback) {
+  const img = new Image(); img.crossOrigin = 'anonymous';
+  img.onload  = (...args) => { img.hasLoaded = true;  onloadCallback?.(img, ...args) }
+  img.onerror = (...args) => { img.hasLoaded = false; onerrorCallback?.(...args)     }
   img.src = url
 
   return img
