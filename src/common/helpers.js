@@ -1,10 +1,9 @@
 function isValidRgbVector(value) {
   if (
-    !value || !Array.isArray(value) || (value.length !== 3) ||
+    !Array.isArray(value) || (value.length !== 3) ||
     value.some(item => !Number.isInteger(item)) ||
     value.some(item => item < 0) || value.some(item => item > 255)
-  )
-    return TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)')
+  ) return TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)')
 
   return true
 }
@@ -16,8 +15,8 @@ function isValidRgbVector(value) {
  * - https://en.wikipedia.org/wiki/HSL_and_HSV
  */
 export function rgbToHsl(rgbVector) {
-  const result = isValidRgbVector(rgbVector)
-  if (result !== true) throw result
+  const validationResult = isValidRgbVector(rgbVector)
+  if (validationResult !== true) throw validationResult
 
   let [ r, g, b ] = rgbVector
   r = r / 255; g = g / 255; b = b / 255
@@ -41,52 +40,69 @@ export function rgbToHsl(rgbVector) {
   return [Math.round(h * 60), Math.round(s * 100), Math.round(l * 100)]
 }
 
-export function imgBase64ToDataUrl(base64String) {
-  if (typeof base64String !== 'string') throw TypeError('value should only be a valid base64 string')
+const validBase64Regex = /^[a-z0-9]+={0,2}$/i
 
-  base64String = base64String.replace(/\s/g, '')
-  if (!/^[a-z0-9]+={0,2}$/i.test(base64String)) throw TypeError('value should only be a valid base64 string')
+function isValidBase64String(value) {
+  if (
+    typeof value !== 'string' ||
+    !validBase64Regex.test(value.replace(/\s/g, ''))
+  ) return TypeError('value should only be a valid base64 string')
 
-  return `data:image/png;base64,${base64String}`
+  return true
 }
 
-export function loadHtmlImage(url, onloadCallback, onerrorCallback) {
-  const img = new Image(); img.crossOrigin = 'anonymous';
-  img.onload  = (...args) => { img.hasLoaded = true;  onloadCallback?.(img, ...args) }
-  img.onerror = (...args) => { img.hasLoaded = false; onerrorCallback?.(...args)     }
-  img.src = url
+export function imgBase64ToDataUrl(base64String) {
+  const validationResult = isValidBase64String(base64String)
+  if (validationResult !== true) throw validationResult
 
-  return img
+  return `data:image/png;base64,${base64String.replace(/\s/g, '')}`
 }
 
 function isNonEmptyString(value) {
-  if (!value || typeof value !== 'string' || !value.trim())
+  if (typeof value !== 'string' || !value.trim())
     return TypeError('value should only be a non-empty string')
 
   return true
+}
+
+export function loadHtmlImage(url, onloadCallback, onerrorCallback) {
+  const validationResult = isNonEmptyString(url)
+  if (validationResult !== true) throw validationResult
+
+  const img = new Image(); img.crossOrigin = 'anonymous'
+  img.onload = (...args) => {
+    img.hasLoaded = true
+    if (typeof onloadCallback === 'function') onloadCallback(img, ...args)
+  }
+  img.onerror = (...args) => {
+    img.hasLoaded = false
+    if (typeof onerrorCallback === 'function') onerrorCallback(...args)
+  }
+
+  img.src = url
+  return img
 }
 
 const acceptedImageExtensions = ['jpg', 'jpeg', 'png', 'webp']
 
 function isAcceptedImageExtension(value) {
   if (
-    isNonEmptyString(value) !== true ||
+    typeof value !== 'string' ||
     !acceptedImageExtensions.includes(value.toLowerCase())
-  )
-    return TypeError('value should only be an accepted image extension (strings jpg, jpeg, png or webp)')
+  ) return TypeError('value should only be an accepted image extension (strings jpg, jpeg, png or webp)')
 
   return true
 }
 
 export function normalizeTestImageFilename(filename, extension) {
-  const filenameResult = isNonEmptyString(filename)
-  if (filenameResult !== true) throw filenameResult
+  const filenameValidationResult = isNonEmptyString(filename)
+  if (filenameValidationResult !== true) throw filenameValidationResult
 
   let normalizedFilename = filename.trim().replace(/\//g, '_')
 
   if (extension != null) {
-    const extensionResult = isAcceptedImageExtension(extension)
-    if (extensionResult !== true) throw extensionResult
+    const extensionValidationResult = isAcceptedImageExtension(extension)
+    if (extensionValidationResult !== true) throw extensionValidationResult
 
     normalizedFilename += '.' + extension.toLowerCase()
   }

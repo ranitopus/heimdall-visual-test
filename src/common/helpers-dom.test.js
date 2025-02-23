@@ -55,4 +55,13 @@ describe('function #loadHtmlImage', () => {
       expect(onerrorCallback).toHaveBeenCalledOnce()
     })
   })
+
+  it('should only accept non-empty string as URL argument', () => {
+    // Arrange
+    const imageSrc = ''
+    // Act
+    const attempt = () => loadHtmlImage(imageSrc)
+    // Assert
+    expect(attempt).toThrow(TypeError('value should only be a non-empty string'))
+  })
 })
