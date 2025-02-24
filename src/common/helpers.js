@@ -2,14 +2,15 @@ function isValidRgbVector(value) {
   if (
     !Array.isArray(value) || (value.length !== 3) ||
     value.some(item => !Number.isInteger(item)) ||
-    value.some(item => item < 0) || value.some(item => item > 255)
+    value.some(item => (item < 0 || item > 255))
   ) return TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)')
 
   return true
 }
 
 /**
- * Sources used for research to implement this function:
+ * @summary Converts RGB vector to HSL vector
+ * @description Sources used for research to implement this function:
  * - https://css-tricks.com/converting-color-spaces-in-javascript/#aa-rgb-to-hsl
  * - https://www.30secondsofcode.org/js/s/rgb-to-hsl/
  * - https://en.wikipedia.org/wiki/HSL_and_HSV

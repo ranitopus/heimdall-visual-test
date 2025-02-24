@@ -37,12 +37,12 @@ describe('function #imgBase64ToDataUrl', () => {
 
   it('should only accept a valid base64 string as argument', () => {
     // Arrange
-    const inputs = [
+    const invalidInputs = [
       false, 0, {}, '', 'not.a;base64', 'çÁëỳ', '-_+', '=abcd', 'ab=cd',
     ]
     let attempt
 
-    inputs.forEach(input => {
+    invalidInputs.forEach(input => {
       // Act
       attempt = () => imgBase64ToDataUrl(input)
       // Assert
@@ -75,13 +75,13 @@ describe('function #rgbToHsl', () => {
 
   it('should only accept a valid RGB vector as argument (array of 3 integers ranging from 0 to 255)', () => {
     // Arrange
-    const inputs = [
-      '255,255,255', [], [0, 0, '0'], [127, 127.5, 127], [-64, 64, 64],
-      [255, 255, 512], null, [0, 0], [0, 0, 0, 0],
+    const invalidInputs = [
+      '255,255,255', [0, 0, '0'], [127, 127.5, 127], [-64, 64, 64],
+      [255, 255, 512], [0, 0], [0, 0, 0, 0], [], null, undefined, false,
     ]
     let attempt
 
-    inputs.forEach(input => {
+    invalidInputs.forEach(input => {
       // Act
       attempt = () => rgbToHsl(input)
       // Assert

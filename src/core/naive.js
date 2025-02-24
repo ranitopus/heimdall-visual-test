@@ -1,9 +1,25 @@
 import { rgbToHsl, loadHtmlImage } from '../common/helpers'
 
-/** Comparação em HSL */
-function arePixelsEqual([ r1, g1, b1 ], [ r2, g2, b2 ], threshold) {
-  const [ h1, s1, l1 ] = rgbToHsl([r1, g1, b1])
-  const [ h2, s2, l2 ] = rgbToHsl([r2, g2, b2])
+function isValidThreshold(value) {
+  if (typeof value !== 'number' || value <= 0 || value >= 1)
+    return TypeError('value should only be a number bigger than 0 and smaller than 1')
+
+  return true
+}
+
+/**
+ * @summary Asserts if two RGB vectors are sufficiently similar based on a given threshold
+ * @description The comparison goes like this:
+ * - First converts each RGB vector into an HSL vector
+ * - Then checks if each HSL channels diffs are within the accepted proportion defined by the threshold
+ * - If any HSL channel diff is bigger than the proportional threshold, the pixels are considered different
+ */
+export function arePixelsEqual(rgb1, rgb2, threshold) {
+  const validationResult = isValidThreshold(threshold)
+  if (validationResult !== true) throw validationResult
+
+  const [ h1, s1, l1 ] = rgbToHsl(rgb1)
+  const [ h2, s2, l2 ] = rgbToHsl(rgb2)
   return (
     (Math.abs(h1 - h2) <= (threshold * 360)) &&
     (Math.abs(s1 - s2) <= (threshold * 100)) &&
