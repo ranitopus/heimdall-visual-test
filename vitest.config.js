@@ -17,5 +17,9 @@ export default defineConfig({
         resources: 'usable',
       },
     },
+    coverage: {
+      include: ['src/**/*.[jt]s'],
+      exclude: ['src/cypress/commands.js'],
+    },
   },
 })
