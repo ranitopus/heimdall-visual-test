@@ -14,7 +14,7 @@ function isValidThreshold(value) {
  * - Then checks if each HSL channels diffs are within the accepted proportion defined by the threshold
  * - If any HSL channel diff is bigger than the proportional threshold, the pixels are considered different
  */
-export function arePixelsEqual(rgb1, rgb2, threshold) {
+export function arePixelsSimilar(rgb1, rgb2, threshold) {
   const validationResult = isValidThreshold(threshold)
   if (validationResult !== true) throw validationResult
 
@@ -28,7 +28,7 @@ export function arePixelsEqual(rgb1, rgb2, threshold) {
 }
 
 function highlightedDiffPixel(pixel1, pixel2, threshold) {
-  return arePixelsEqual(pixel1, pixel2, threshold) ?
+  return arePixelsSimilar(pixel1, pixel2, threshold) ?
          [pixel1[0], pixel1[1], 255, 64] :
          [255, pixel2[1], pixel2[2], 255]
 }
@@ -69,7 +69,7 @@ function calcDiffWithCanvas({
   for (let i = 0, len = img1Array.length; i < len; i += 4) {
     img1Pixel = [img1Array[i], img1Array[i + 1], img1Array[i + 2]]
     img2Pixel = [img2Array[i], img2Array[i + 1], img2Array[i + 2]]
-    if (!arePixelsEqual(img1Pixel, img2Pixel, pxDistThreshold) && !thresholdReached) diffPixelsCount++
+    if (!arePixelsSimilar(img1Pixel, img2Pixel, pxDistThreshold) && !thresholdReached) diffPixelsCount++
 
     const [ diffR, diffG, diffB, diffA ] = highlightedDiffPixel(img1Pixel, img2Pixel, pxDistThreshold)
     img3Array[i] = diffR; img3Array[i + 1] = diffG; img3Array[i + 2] = diffB; img3Array[i + 3] = diffA

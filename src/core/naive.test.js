@@ -1,10 +1,15 @@
 import { describe, it, expect } from 'vitest'
 
-import { arePixelsEqual } from './naive'
+import { arePixelsSimilar } from './naive'
 
-describe('function #arePixelsEqual', () => {
-  it.todo('should consider two pixels as equal if all their HSL channels diffs are within the threshold')
-  it.todo('should consider two pixels as different if all their HSL channels diffs are within the threshold')
+describe('function #arePixelsSimilar', () => {
+  it.todo('should consider two pixels as similar if all their HSL channels diffs are within the threshold', () => {
+
+  })
+
+  it.todo('should consider two pixels as different if all their HSL channels diffs are within the threshold', () => {
+
+  })
 
   it('should only accept pixel arguments that are valid RGB vectors', () => {
     // Arrange
@@ -16,8 +21,8 @@ describe('function #arePixelsEqual', () => {
 
     invalidRgbVectors.forEach(rgbVec => {
       // Act
-      attempt1 = () => arePixelsEqual(validRgbVector, rgbVec, validThreshold)
-      attempt2 = () => arePixelsEqual(rgbVec, validRgbVector, validThreshold)
+      attempt1 = () => arePixelsSimilar(validRgbVector, rgbVec, validThreshold)
+      attempt2 = () => arePixelsSimilar(rgbVec, validRgbVector, validThreshold)
       // Assert
       expect(attempt1).toThrow(TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)'))
       expect(attempt2).toThrow(TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)'))
@@ -33,7 +38,7 @@ describe('function #arePixelsEqual', () => {
 
     invalidThresholds.forEach(threshold => {
       // Act
-      attempt = () => arePixelsEqual(rgbPx1, rgbPx2, threshold)
+      attempt = () => arePixelsSimilar(rgbPx1, rgbPx2, threshold)
       // Assert
       expect(attempt).toThrow(TypeError('value should only be a number bigger than 0 and smaller than 1'))
     })
