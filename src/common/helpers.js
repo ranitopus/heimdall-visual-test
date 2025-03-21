@@ -38,6 +38,8 @@ export function rgbToHsl(rgbVector) {
 
   s = (delta === 0) ? 0 : delta / (1 - Math.abs(2 * l - 1))
 
+  if (h < 0) h = 6 + h // <-- stop it from calculating negative values for Hue (for example: instead of resulting on -40°, it turns it to 320°)
+
   return [Math.round(h * 60), Math.round(s * 100), Math.round(l * 100)]
 }
 
