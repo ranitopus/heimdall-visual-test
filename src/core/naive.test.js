@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-import { arePixelsSimilar } from './naive'
+import { arePixelsSimilar, diffResultMessage } from './naive'
 
 describe('function #arePixelsSimilar', () => {
   it('should consider two pixels as similar if all their HSL channels diffs are within the threshold', () => {
@@ -78,6 +78,14 @@ describe('function #arePixelsSimilar', () => {
 })
 
 describe.todo('function #highlightedDiffPixel')
-describe.todo('function #diffResultMessage')
+
+describe('function #diffResultMessage', () => {
+  it.todo('should build text message for when the different pixels count is above the threshold')
+  it.todo('should build text message for when the different pixels count is below the threshold')
+  it.todo('should only accept a positive integer as diffPixelsCount argument')
+  it.todo('should only accept a positive integer as totalPixels argument')
+  it.todo('should only accept a number between 0 and 1 as threshold argument')
+})
+
 describe.todo('function #calcDiffWithCanvas')
 describe.todo('function #testImagesDiff')

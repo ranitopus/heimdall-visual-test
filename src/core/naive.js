@@ -33,7 +33,7 @@ function highlightedDiffPixel(pixel1, pixel2, threshold) {
          [255, pixel2[1], pixel2[2], 255]
 }
 
-function diffResultMessage(diffPixelsCount, totalPixels, threshold) {
+export function diffResultMessage(diffPixelsCount, totalPixels, threshold) {
   const isBiggerOrEqual = ((diffPixelsCount / totalPixels) >= threshold)
 
   const diffResultMessage = `different pixels: ${
