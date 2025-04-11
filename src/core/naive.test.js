@@ -77,15 +77,28 @@ describe('function #arePixelsSimilar', () => {
   })
 })
 
-describe.todo('function #highlightedDiffPixel')
+describe('function #highlightedDiffPixel', () => {
+  it.todo('should generate a pixel that indicates similarity for two similar pixels')
+  it.todo('should generate a pixel that indicates difference for two different pixels')
+  it.todo('should only accept valid RGB vectors as pixel arguments')
+  it.todo('should only accept a number between 0 and 1 as threshold argument')
+})
 
 describe('function #diffResultMessage', () => {
   it.todo('should build text message for when the different pixels count is above the threshold')
   it.todo('should build text message for when the different pixels count is below the threshold')
   it.todo('should only accept a positive integer as diffPixelsCount argument')
   it.todo('should only accept a positive integer as totalPixels argument')
+  it.todo('should not accept a totalPixels value that is less than diffPixelsCount')
   it.todo('should only accept a number between 0 and 1 as threshold argument')
 })
 
-describe.todo('function #calcDiffWithCanvas')
-describe.todo('function #testImagesDiff')
+describe('function #calcDiffWithCanvas', () => {
+  it.todo('case 1')
+  it.todo('case 2')
+})
+
+describe('function #testImagesDiff', () => {
+  it.todo('case 1')
+  it.todo('case 2')
+})
