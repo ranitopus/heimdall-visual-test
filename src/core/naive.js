@@ -73,7 +73,7 @@ export function diffResultMessage(diffPixelsCount, totalPixels, threshold) {
  * - Can we visualize the images (including a new image showing the similarities
  * and differences from the compared images)?
  */
-function calcDiffWithCanvas({
+export function calcDiffWithCanvas({
   canvasBase, canvasCurrent, canvasDiff,
   x, y, width, height,
   amtDiffThreshold, pxDistThreshold,
