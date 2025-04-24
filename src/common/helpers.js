@@ -9,7 +9,7 @@ function isValidRgbVector(value) {
 }
 
 /**
- * @summary Converts RGB vector to HSL vector
+ * @summary Converts a valid RGB vector into an HSL vector
  * @description Sources used for research to implement this function:
  * - https://css-tricks.com/converting-color-spaces-in-javascript/#aa-rgb-to-hsl
  * - https://www.30secondsofcode.org/js/s/rgb-to-hsl/
@@ -54,6 +54,7 @@ function isValidBase64String(value) {
   return true
 }
 
+/** Converts a valid Base64 string into a corresponding Image Data URL */
 export function imgBase64ToDataUrl(base64String) {
   const validationResult = isValidBase64String(base64String)
   if (validationResult !== true) throw validationResult
@@ -68,6 +69,7 @@ function isNonEmptyString(value) {
   return true
 }
 
+/** Returns an HTML Image object that may load the given URL */
 export function loadHtmlImage(url, onloadCallback, onerrorCallback) {
   const validationResult = isNonEmptyString(url)
   if (validationResult !== true) throw validationResult
@@ -97,6 +99,9 @@ function isAcceptedImageExtension(value) {
   return true
 }
 
+/** Converts a path string to a convenient format to name a test image file
+ * (potentially appending an extension)
+ */
 export function normalizeTestImageFilename(filename, extension) {
   const filenameValidationResult = isNonEmptyString(filename)
   if (filenameValidationResult !== true) throw filenameValidationResult
