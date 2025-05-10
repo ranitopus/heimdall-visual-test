@@ -17,7 +17,7 @@ ROADMAP 1.0
 - [ ] Better criteria for pixels comparison, with more cofigurable thresholds (separating H, S and L)
 - [ ] Give to the Cypress test command the capacity of screenshoting single DOM elements
 - [ ] Improve/add new image comparison methods (make it less naive and brute-force, possibly apply SURF and/or SIFT from OpenCV)
-- [ ] "How-to-use" documentation (Improve README and/or add more docs if needed) `<< 1.0.0-alpha milestones end here`
+- [ ] "How-to-use" documentation (Improve README and/or add more docs if needed) `<<< 1.0.0-alpha milestones end here`
 - [ ] TypeScript type definitions
 - [ ] Improve test logging for the Cypress command
 - [ ] Friendly display of image comparison on the Cypress suite screen (for headless runs with video recording, for example)

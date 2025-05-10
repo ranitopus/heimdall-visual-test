@@ -116,7 +116,12 @@ export function calcDiffWithCanvas({
   }
 }
 
-/** ??? */
+/**
+ * @summary Compares two different images (URLs) and generate some data about their level of similarity/difference
+ * @description It returns a Promise that can resolve into:
+ * - An error, if something along the pipeline fails
+ * - An object with some information about the comparison: if the threshold was reached, amount of different pixels, etc
+ */
 export function testImagesDiff({
   baseImgUrl, newImgUrl,
   amtDiffThreshold = 0.05, pxDistThreshold = 0.1,
