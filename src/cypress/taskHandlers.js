@@ -1,9 +1,9 @@
-const fs = require('fs/promises')
-const normalizeFilename = require('../common/helpers').normalizeTestImageFilename
+import fs from 'fs/promises'
+import { normalizeTestImageFilename as normalizeFilename } from '../common/helpers'
 
 const defaultImageExtension = 'png'
 
-module.exports = function visualTestingTasks(cypressConfig) {
+export default function visualTestingTasks(cypressConfig) {
   return {
     maybeVisualTestExists({ imageName }) {
       imageName = normalizeFilename(imageName, defaultImageExtension)

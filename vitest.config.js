@@ -1,10 +1,14 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig, defaultExclude } from 'vitest/config'
 
 export default defineConfig({
   test: {
     watch: false,
     reporters: ['verbose'],
     include: ['src/**/*.test.js'],
+    exclude: [
+      ...defaultExclude.filter(item => item !== '**/cypress/**'),
+      'drafts', 'coverage', 'cypress',
+    ],
     /**
      * Environment configurations to enable external resource loading for tests,
      * such as real image loading from URLs, for example. based on:
