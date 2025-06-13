@@ -43,7 +43,7 @@ export function rgbToHsl(rgbVector) {
   return [Math.round(h * 60), Math.round(s * 100), Math.round(l * 100)]
 }
 
-const validBase64Regex = /^[a-z0-9]+={0,2}$/i
+const validBase64Regex = /^[a-z0-9\/\+]+={0,2}$/i
 
 function isValidBase64String(value) {
   if (

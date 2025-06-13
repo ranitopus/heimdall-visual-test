@@ -22,6 +22,16 @@ describe('function #imgBase64ToDataUrl', () => {
     expect(result).toMatch(new RegExp(`^data:image/[a-z]{3,4};base64,${cleanInput}`))
   })
 
+  it('should accept a base64 string with slashes and plus signs', () => {
+    // Arrange
+    const input = 'lorem+ipsum/123/+456',
+          formattedInputForRegExp = input.replace(/\//g, '\\/').replace(/\+/g, '\\+')
+    // Act
+    const result = imgBase64ToDataUrl(input)
+    // Assert
+    expect(result).toMatch(new RegExp(`^data:image/[a-z]{3,4};base64,${formattedInputForRegExp}`))
+  })
+
   it('should accept a base64 string with up to 2 "=" characters at the end', () => {
     // Arrange
     const inputA = 'abcd=', inputB = 'abcd==', inputC = 'abcd==='
