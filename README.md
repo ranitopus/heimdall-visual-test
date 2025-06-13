@@ -2,7 +2,8 @@ Heimdall Visual Test
 ====================
 **JavaScript tooling for visual testing automation**
 
-## Known Problems
+## Roadmap
+See current roadmap [in this doc](./ROADMAP.md).
 
-### 1. When Cypress uses `.js` files from `heimdall-visual-test`, it doesn't accept ES Module syntax in those files.
-(Not solved yet, to be investigated)
+## Known Problems and Unsolved Issues
+See the catalog [in this doc](./ISSUES.md).

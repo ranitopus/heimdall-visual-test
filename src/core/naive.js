@@ -1,4 +1,4 @@
-import { rgbToHsl, loadHtmlImage } from '../common/helpers'
+import { rgbToHsl, loadHtmlImage } from '../common/helpers.js'
 
 function isValidThreshold(value) {
   if (typeof value !== 'number' || value <= 0 || value >= 1)

@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { normalizeTestImageFilename as normalizeFilename } from '../common/helpers'
+import { normalizeTestImageFilename as normalizeFilename } from '../common/helpers.js'
 
 const defaultImageExtension = 'png'
 
