@@ -8,10 +8,10 @@ ROADMAP 1.0
 - [x] NPM first package publishing (naive implementation + Cypress integration only)
 - [x] Consolidate ROADMAP 1.0
 - [ ] **Unit testing for the abstract lib for image comparison `IN PROGRESS`**
+- [ ] **CHANGELOG `IN PROGRESS`**
 - [ ] End-to-end/functional testing for the Cypress integration
 - [ ] CI automated pipeline to run tests before merging
 - [ ] Basic GitHub commit/branch/pull request rules and branch protection for contribution/version control safety
-- [ ] CHANGELOG
 - [ ] Bundle/build process with separation of libs (example: [Lerna](https://lerna.js.org/))
 - [ ] CD automated pipeline to publish NPM package (publish only the built bundle)
 - [ ] Better criteria for pixels comparison, with more cofigurable thresholds (separating H, S and L)
