@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Separating source content into modules `common`, `core` and `cypress`.
 - Applying ES Modules syntax.
+- Improving README file.
