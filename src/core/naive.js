@@ -41,9 +41,7 @@ export function highlightedDiffPixel(baseImgPixel, currentImgPixel, threshold) {
          [255, currentImgPixel[1], currentImgPixel[2], 255] // <-- to indicate difference: max out red channel
 }
 
-/**
- * Constructs the text message that indicates the difference rate of two images
- */
+/** Constructs the text message that indicates the difference rate of two images */
 export function diffResultMessage(diffPixelsCount, totalPixels, threshold) {
   const isBiggerOrEqual = ((diffPixelsCount / totalPixels) >= threshold)
 

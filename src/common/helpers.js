@@ -99,7 +99,8 @@ function isAcceptedImageExtension(value) {
   return true
 }
 
-/** Converts a path string to a convenient format to name a test image file
+/**
+ * Converts a path string to a convenient format to name a test image file
  * (potentially appending an extension)
  */
 export function normalizeTestImageFilename(filename, extension) {
