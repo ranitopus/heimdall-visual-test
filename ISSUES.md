@@ -32,7 +32,7 @@ Known Problems and Unsolved Issues
 >     // (...)
 >     async setupNodeEvents(on, config) {
 >       // (...)
->       const visualTestingTasks = await import('heimdall-visual-test/src/cypress/taskHandlers').default
+>       const visualTestingTasks = (await import('heimdall-visual-test/src/cypress/taskHandlers')).default
 >       on('task', {...visualTestingTasks(config)})
 >     }
 >   }
