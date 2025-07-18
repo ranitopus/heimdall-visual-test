@@ -1,8 +1,9 @@
 function isValidRgbVector(value) {
   if (
     !Array.isArray(value) || (value.length !== 3) ||
-    value.some(item => !Number.isInteger(item)) ||
-    value.some(item => (item < 0 || item > 255))
+    value.some(item =>
+      !Number.isInteger(item) || item < 0 || item > 255
+    )
   ) return TypeError('value should only be a RGB vector (array of 3 integers ranging from 0 to 255)')
 
   return true
