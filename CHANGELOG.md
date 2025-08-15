@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Unit tests for core functionality.
 - External package `vitest` as unit testing suite.
-- CHANGELOG and document for issues.
+- CHANGELOG, document for Issues, and Architecture Decision Records structure.
 ### Changed
 - Separating source content into modules `common`, `core` and `cypress`.
 - Applying ES Modules syntax.
