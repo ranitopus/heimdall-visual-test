@@ -4,7 +4,7 @@ Architecture Decision Record (ADR) Template
 >
 > - **You don't have to create an ADR for every single choice**: Be criterious with what would be considered a relevant/important Architecture Decision, and register only those; Don't bother creating a document like this for eveything, or else they miss their purpose, and making them will become unbearable.
 > - You can **ask yourself some questions to help you assert if a decision should be registered or not**, and what you should register about it: "When the path changes in the future, how can anyone know why the project have been walking in the previous path, and why did the path change?" "How many parts are affected by this decision?" "Why is this process the one we follow?" "Why is this structure the one we use to organize the code and the project?" "Why is this the delivery cycle?" "Why is this the architecture of choice?".
-> - **Don't be too fixated on writing everything on extensive detail**, and don't feel obligated to fill every single topic of the ADR, but at the very least fill the 3 first ones: Context, Decision and Status.
+> - **Don't be too fixated on writing everything on extensive detail** if you don't have to or don't want to, and don't feel obligated to fill every single topic of the ADR, but at the very least fill the 3 first ones: Context, Decision and Status.
 >
 > Copy the following content below as a template to a new file (name it in the format `0000-four-words-descriptive-name.md`, for example) and modify/fill it according to what is needed.
 
