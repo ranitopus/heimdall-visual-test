@@ -7,8 +7,9 @@ ROADMAP 1.0
 - [x] Integration with Cypress
 - [x] NPM first package publishing (naive implementation + Cypress integration only)
 - [x] Consolidate ROADMAP 1.0
+- [x] LICENSE documentation
+- [x] CHANGELOG
 - [ ] **Unit testing for the abstract lib for image comparison `IN PROGRESS`**
-- [ ] **CHANGELOG `IN PROGRESS`**
 - [ ] End-to-end/functional testing for the Cypress integration
 - [ ] CI automated pipeline to run tests before merging
 - [ ] Basic GitHub commit/branch/pull request rules and branch protection for contribution/version control safety
@@ -24,7 +25,7 @@ ROADMAP 1.0
 - [ ] Better abstract lib for image comparison, with richer API, working on both Node.js and browser environments
 - [ ] Integration with Vitest
 - [ ] Presentation site/landing page
-- [ ] CONTRIBUTING and LICENSE documentations
+- [ ] CONTRIBUTING documentation
 
 ## 1.0.0-alpha Release
 ### Planned release date
