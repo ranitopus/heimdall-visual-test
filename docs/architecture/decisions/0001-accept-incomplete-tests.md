@@ -13,7 +13,7 @@ The work done in the `unit-testing` branch should be merged with the rest of the
 - Because the `unit-testing` branch will still exist with the same purpose of providing unit testing coverage, the associated milestone in the roadmap will still be considered "In Progress", being marked as finished only when all code that was marked to be tested is finally tested.
 
 ## Status
-* `ANALYSIS`
+* `IMPLEMENTED`
 
 ## Consequences
 - Possibility of starting and progressing on new milestones simultaneously, which can even enable other people to join in on completing the roadmap, but also compromises the original sequential plan;
