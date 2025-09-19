@@ -1,39 +1,45 @@
-const fs = require('fs/promises')
+import fs from 'fs/promises'
+import { normalizeTestImageFilename as normalizeFilename } from '../common/helpers.js'
 
-function normalizeFilename(filename) {
-  return filename.trim().replace(/\//g, '_') + '.png'
-}
+const defaultImageExtension = 'png'
 
-module.exports = function visualTestingTasks(cypressConfig) {
+/** Provides the neccessary Node.js Cypress tasks to be used as helpers for the visual testing command */
+export default function visualTestingTasks(cypressConfig) {
   return {
-    maybeVisualTestExists({ imageName }) {
-      imageName = normalizeFilename(imageName)
+    /** Checks if the given image exists in the base images directory */
+    async maybeVisualTestExists({ imageName }) {
+      imageName = normalizeFilename(imageName, defaultImageExtension)
 
-      return fs.stat(`${cypressConfig.visualTestFolder}/${imageName}`)
-        .then(_=> true)
-        .catch(err => {
-          if (err.code === 'ENOENT') return false
-          else throw err
-        })
-    },
-    async mvToVisualTestFolder({ imageName }) {
-      imageName = normalizeFilename(imageName)
-
-      await fs.stat(cypressConfig.visualTestFolder).catch(err => {
-        if (err.code === 'ENOENT') return fs.mkdir(cypressConfig.visualTestFolder)
+      try {
+        await fs.stat(`${cypressConfig.visualTestFolder}/${imageName}`)
+        return true
+      } catch (err) {
+        if (err.code === 'ENOENT') return false
         else throw err
-      })
+      }
+    },
+    /** Moves an existing screenshot into the base images directory */
+    async mvToVisualTestFolder({ imageName }) {
+      imageName = normalizeFilename(imageName, defaultImageExtension)
 
-      return fs.rename(
+      try {
+        await fs.stat(cypressConfig.visualTestFolder)
+      } catch (err) {
+        if (err.code === 'ENOENT') fs.mkdir(cypressConfig.visualTestFolder)
+        else throw err
+      }
+
+      await fs.rename(
         `${cypressConfig.screenshotsFolder}/${imageName}`,
         `${cypressConfig.visualTestFolder}/${imageName}`
       )
-        .then(_=> null)
+      return null
     },
-    rmCurrentVisualState({ imageName }) {
-      imageName = normalizeFilename(imageName)
-      return fs.rm(`${cypressConfig.screenshotsFolder}/${imageName}`)
-        .then(_=> null)
+    /** Erases an image from the screenshots folder */
+    async rmCurrentVisualState({ imageName }) {
+      imageName = normalizeFilename(imageName, defaultImageExtension)
+      await fs.rm(`${cypressConfig.screenshotsFolder}/${imageName}`)
+      return null
     },
   }
 }

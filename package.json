@@ -1,11 +1,14 @@
 {
   "name": "heimdall-visual-test",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "General Visual Test tooling",
   "private": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:unit:watch": "vitest --watch --ui",
+    "test:unit": "vitest --run",
+    "test:unit:coverage": "vitest --coverage"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/ranitopus/heimdall-visual-test.git"
@@ -25,5 +28,12 @@
   "bugs": {
     "url": "https://github.com/ranitopus/heimdall-visual-test/issues"
   },
-  "homepage": "https://github.com/ranitopus/heimdall-visual-test#readme"
+  "homepage": "https://github.com/ranitopus/heimdall-visual-test#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.0.5",
+    "@vitest/ui": "^3.0.5",
+    "canvas": "^3.1.0",
+    "jsdom": "^26.0.0",
+    "vitest": "^3.0.5"
+  }
 }
